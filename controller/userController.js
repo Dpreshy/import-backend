@@ -4,8 +4,8 @@ const nodemailer = require("nodemailer");
 const transport = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "preciousonuegbu46@gmail.com",
-    pass: " Top12345 ",
+    user: "Gideonekeke64@gmail.com",
+    pass: "sgczftichnkcqksx",
   },
 });
 
@@ -19,10 +19,10 @@ const createUser = async (req, res) => {
     });
 
     const mailOptions = {
-      from: "preciousonuegbu23@hotmail.com",
-      to: email,
+      from: "",
+      to: "officialpresh20@gmail.com",
       subject: "Account Verification",
-      html: `<h2>request for quote </h2>
+      html: `<h2>request for quote </h2>Y7
   <p>name:${name} </p>
   <p>email:${email} </p>
   <p>message:${message} </p>
@@ -47,6 +47,26 @@ const createUser = async (req, res) => {
   }
 };
 
+const getUsers = async (req, res) => {
+  try {
+    const user = await userModel.find();
+    res.status(200).json({ message: "success", data: user });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+const deleteUser = async (req, res) => {
+  try {
+    const user = await userModel.findByIdAndDelete(req.params.id);
+    res.status(200).json({ message: "success", data: user });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
 module.exports = {
   createUser,
+  getUsers,
+  deleteUser,
 };
